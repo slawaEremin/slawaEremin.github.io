@@ -1,0 +1,522 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "contact": {
+      "url": "https://insurino.se",
+      "email": "contact@insurino.se"
+    },
+    "title": "Insurino public",
+    "version": "1.4",
+    "description": "<p>Insurino lets you connect to Swedish property&amp;casualty insurers and easily access insurance-related data.</p><p>Insurino Link is a front-end SDK for secure and fast user authentication towards insurers. By integrating it with a single line of code into your website or app, you allow your users to access and import their current policy data into your service, regardless of insurer.</p><div class='d-flex justify-content-center py-4'> <div class='col-12 col-md-6'> <div class='bg-light p-4 text-center'> <img src='img/gif/demo-in-iphone-mockup.gif' alt='' style='max-width: 150px;' class='img-fluid'> </div></div></div>\n\n# Developer account setup\n<p>First step is to <em><a href='/sign_up_form.html' title='register'>register</a></em> your <strong>free developer account </strong>with Insurino. </p><p>We allow organizations with a Swedish registration number to setup an account. </p><h3 class='h5 mb-4 mt-5 font-weight-bold' id='Settings-to-be-defined-for-your-account'> Settings to be defined for your account </h3> <p>Among your contact details, you specify the redirect URI for your account. </p><ul class='ak-ul'> <li> <p>Redirect URI - where your users will be redirected to, when the data sharing has been done</p></li></ul> <div style='background-color: rgb(222, 235, 255); background-position: initial; background-repeat: initial;' class='ak-editor-panel d-flex p-2 my-4' data-panel-type='info'> <span style='color: rgb(0, 82, 204);' class='ak-editor-panel__icon mr-3'> <span class='sc-ifAKCX cPdAGc' role='img' aria-label='Panel info'> <svg width='24' height='24' viewBox='0 0 24 24' focusable='false' role='presentation'> <path d='M12 20a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm0-8.5a1 1 0 0 0-1 1V15a1 1 0 0 0 2 0v-2.5a1 1 0 0 0-1-1zm0-1.125a1.375 1.375 0 1 0 0-2.75 1.375 1.375 0 0 0 0 2.75z' fill='currentColor' fill-rule='evenodd'></path> </svg> </span> </span> <div class='ak-editor-panel__content'> <p> <strong>What is a </strong> <em> <strong>redirect URI</strong> </em> <strong>?</strong> </p><p>You specify a&nbsp; <em> <strong>redirect URI</strong> </em>&nbsp;to be used send the users back to your web server or app after they have successfully shared their policy data with you from Insurino link </p><p class='mb-0'>For example: you company portal is <code>https://site.com</code> . You may use any URL such as <code>https://site.com/find-you-contracts</code> to redirect. After sharing the policy data, the user will be forwarded to your portal <code>https://site.com/find-you-contracts?uuid={YOUR_USER_SHARING_CODE}</code>. </p></div></div><p>When your account is setup you obtain your <strong>integration link</strong> and <strong>Api key</strong> to start working with collection of policy data </p><div style='background-color: rgb(227, 252, 239); background-position: initial; background-repeat: initial;' class='ak-editor-panel d-flex p-2 my-4' data-panel-type='success'> <span style='color: rgb(0, 135, 90);' class='ak-editor-panel__icon '> <span class='sc-ifAKCX cPdAGc' role='img' aria-label='Panel success'> <svg width='24' height='24' viewBox='0 0 24 24' focusable='false' role='presentation'> <path d='M12 20a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm1.364-10.964l-2.152 4.11-1.543-1.39a1 1 0 1 0-1.338 1.487l2.5 2.25a1 1 0 0 0 1.555-.279l2.75-5.25a1 1 0 0 0-1.772-.928z' fill='currentColor' fill-rule='evenodd'></path> </svg> </span> </span> <div class='ak-editor-panel__content'> <ul class='ak-ul mb-0'> <li> <p class='mb-2'> <strong>Integration link</strong> is your unique URL. Use this URL directly in your mobile app or web-portal </p></li><li> <p class='mb-0'> <strong>Api key </strong>is you personal secret key for access to <em>Insurino API </em>and retrieve the shared data </p></li></ul> </div></div><p>&nbsp;</p>\n\n# Integration setup\n<p>Insurino Link can be easily integrated into your website or app, in <em>one line of code</em>, simply by redirecting to the Integration link URL, that you obtain after account setup. </p><p>The users of your mobile app or web-portal are now able to authorize against their insurers and share their insurance policy data with you. </p><p>&nbsp;</p><h3 class='h5 mb-4 font-weight-bold' id='Data-sharing'> Data sharing </h3> <p>On a successful data sharing, your browser should send you to the <strong>Redirect URI</strong> that you specified in your account setup step. </p><p>It should contain a sharing <span class='code'>code</span>, and your browser URL window will contain a URL similar to: <code>{redirect_uri}?uuid={YOUR_USER_SHARING_CODE}</code>. </p><p>Use you personal <strong>API Key</strong> to obtain the data shared by user, by following the examples below. </p><div style='background-color: rgb(255, 235, 230); background-position: initial; background-repeat: initial;' class='ak-editor-panel d-flex p-2 my-4' data-panel-type='error'> <span style='color: rgb(222, 53, 11);' class='ak-editor-panel__icon mr-3'> <span class='sc-ifAKCX cPdAGc' role='img' aria-label='Panel error'> <svg width='24' height='24' viewBox='0 0 24 24' focusable='false' role='presentation'> <path d='M13.485 11.929l2.122-2.121a1 1 0 0 0-1.415-1.415l-2.12 2.122L9.95 8.393a1 1 0 0 0-1.414 1.415l2.12 2.12-2.12 2.122a1 1 0 0 0 1.414 1.414l2.121-2.12 2.121 2.12a1 1 0 1 0 1.415-1.414l-2.122-2.121zM12 20a8 8 0 1 1 0-16 8 8 0 0 1 0 16z' fill='currentColor' fill-rule='evenodd'></path> </svg> </span> </span> <div class='ak-editor-panel__content'> <p class='mb-0 mt-1'>Perform the requests directly from your web server.<br>Do not use/store/pass <strong>Api Key</strong> on the client side or in a mobile application. </p></div></div><h4 class='h6 mb-4 font-weight-bold' id='Example-to-obtain-contract-request:'>Example: Request</h4> <div id='contract-request'> </div><p>If you provided the correct&nbsp; <code>{YOUR_USER_SHARING_CODE}</code> &nbspand&nbsp; <code>{YOU_API_KEY}</code>, you should get a successful response with user contracts. </p><a data-toggle='collapse' href='#collapseDummyExample' role='button' aria-expanded='false' aria-controls='collapseDummyExample' class='collapse-link mt-4 d-block'><svg width='24' height='24' viewBox='0 0 24 24' focusable='false' role='presentation'><path d='M10.294 9.698a.988.988 0 0 1 0-1.407 1.01 1.01 0 0 1 1.419 0l2.965 2.94a1.09 1.09 0 0 1 0 1.548l-2.955 2.93a1.01 1.01 0 0 1-1.42 0 .988.988 0 0 1 0-1.407l2.318-2.297-2.327-2.307z' fill='currentColor' fill-rule='evenodd'></path></svg>Example: Response</a></p><div class='collapse' id='collapseDummyExample'><div class='card card-body'><div id='contract-response'> </div></div></div>\n\n# Test your integration with dummy data\n<p>You can easily test the integration of Insurino Link with predefined (dummy) data. It allows you to skip the authorization steps to any insurer.</p><p>To go into test mode, add the postfix <code>/dummy</code> to your <strong>integration link</strong>.</p><p><strong>For example:</strong><br>if your integration link is <code>https://link.insurino.se/?uuid=a87f485a-ffbf-4083-803a-5910394b493d</code></p><p>then use <code>https://link.insurino.se/?uuid=a87f485a-ffbf-4083-803a-5910394b493d/dummy</code> URL for test.</p><p>On the page, opened by this link, you may enter any ssn and get test contract data returned without any authorization.</p><p> "
+  },
+  "servers": [
+    {
+      "url": "https://api.insurino.se"
+    }
+  ],
+  "paths": {
+    "/api/v3/public/{uuid}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Request status and client shared contracts details",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicApiResponse"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "uuid",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Get shared contracts",
+        "operationId": "get-sahred-contracts",
+        "description": "The method returns all contract data shared by the user.",
+        "tags": [
+          "Get shared contracts"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "c0b00777-b5ae-457e-be6b-e88095f20990"
+          },
+          "name": "uuid",
+          "in": "path",
+          "required": true,
+          "description": "Rquest group UUID"
+        }
+      ]
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "header": {
+        "type": "apiKey",
+        "name": "X-Insurino-Api-Key",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "PublicApiResponse": {
+        "type": "object",
+        "title": "Public API response",
+        "description": "Public API Response",
+        "x-examples": {
+          "Example": {
+            "uuid": "8b1e8d05-f7ca-4385-afeb-d54b3c26c9f3",
+            "status": "CLOSED",
+            "contracts": [
+              {
+                "uuid": "da124aaf-92ab-4cc9-8b36-112762fc1091",
+                "insurer": "LF",
+                "policyId": "LF099423443343",
+                "contractType": "HOME",
+                "name": "Hemförsäkring Mellan",
+                "yearlyPrice": 2350,
+                "untilDate": "2020-12-15",
+                "home": {
+                  "address": "221b Baker Street",
+                  "buildingName": "Empire State Building",
+                  "members": "Jane Doe; John Doe"
+                },
+                "vehicle": {
+                  "regNr": "FFF123"
+                },
+                "boat": {
+                  "name": "Vasa"
+                },
+                "personal": {
+                  "name": "John Doe"
+                },
+                "animal": {
+                  "name": "Kitty"
+                },
+                "business": {
+                  "name": "Microsoft"
+                }
+              }
+            ]
+          }
+        },
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "Unique group string id",
+            "format": "uuid",
+            "example": "8b1e8d05-f7ca-4385-afeb-d54b3c26c9f3"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "SENT",
+              "DELIVERED",
+              "ERROR",
+              "VIEWED",
+              "CLOSED"
+            ],
+            "description": "indication of end-user link status: | \nCreated - new link created, never opened |\nViewed - user has opened link in browser |\nClosed - only upon successfull data sharing. ",
+            "example": "CLOSED"
+          },
+          "contracts": {
+            "type": "array",
+            "description": "Consumer shared contracts",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uuid": {
+                  "type": "string",
+                  "format": "uuid",
+                  "description": "Unique contract string id",
+                  "example": "da124aaf-92ab-4cc9-8b36-112762fc1091"
+                },
+                "insurer": {
+                  "type": "string",
+                  "description": "Name of insurance company",
+                  "example": "LF"
+                },
+                "policyId": {
+                  "type": "string",
+                  "example": "LF099423443343",
+                  "description": "Contract policy id"
+                },
+                "contractType": {
+                  "type": "string",
+                  "description": "Contract type code",
+                  "enum": [
+                    "HOME",
+                    "VEHICLE",
+                    "PERSON",
+                    "BOAT",
+                    "BUSINESS",
+                    "ANIMAL",
+                    "OTHER"
+                  ],
+                  "example": "HOME"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Contract name",
+                  "example": "Hemförsäkring Mellan"
+                },
+                "yearlyPrice": {
+                  "type": "number",
+                  "example": 2350,
+                  "description": "Contract yearly price",
+                  "minimum": 10,
+                  "maximum": 100000
+                },
+                "untilDate": {
+                  "type": "string",
+                  "format": "date",
+                  "example": "2020-12-15",
+                  "description": "Contract until date"
+                },
+                "pdfFiles": {
+                  "type": "array[string]",
+                  "example": "[]",
+                  "description": "Contract pdf files unique IDs"
+                },
+                "home": {
+                  "type": "object",
+                  "description": "Home contract details",
+                  "properties": {
+                    "homeType": {
+                      "type": "string",
+                      "example": "LEASED",
+                      "enum": [
+                        "VILLA",
+                        "COTTAGE",
+                        "LEASED",
+                        "OWN"
+                      ],
+                      "description": "Home Type"
+                    },
+                    "zipCode": {
+                      "type": "string",
+                      "example": "12345",
+                      "description": "Zip code"
+                    },
+                    "address": {
+                      "type": "string",
+                      "example": "221b Baker Street",
+                      "description": "Home address"
+                    },
+                    "buildingName": {
+                      "type": "string",
+                      "description": "Building name",
+                      "example": "Empire State Building"
+                    },
+                    "buildingType": {
+                      "type": "string",
+                      "description": "Type of building",
+                      "example": "VILLA"
+                    },
+                    "buildYear": {
+                      "type": "number",
+                      "description": "Building build year",
+                      "example": 1993,
+                      "minimum": 1000,
+                      "maximum": 2100
+                    },
+                    "members": {
+                      "type": "string",
+                      "description": "Covered members",
+                      "example": "Jane Doe; John Doe"
+                    },
+                    "membersCount": {
+                      "type": "number",
+                      "description": "Covered members count",
+                      "example": 3,
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "purchaseYear": {
+                      "type": "number",
+                      "description": "Purchase year",
+                      "example": 2004,
+                      "minimum": 1900,
+                      "maximum": 2100
+                    },
+                    "area": {
+                      "type": "number",
+                      "description": "Area",
+                      "example": 136,
+                      "minimum": 0,
+                      "maximum": 100000
+                    },
+                    "biArea": {
+                      "type": "number",
+                      "description": "Sub-area of the house",
+                      "example": 136,
+                      "minimum": 0,
+                      "maximum": 100000
+                    },
+                    "bathrooms": {
+                      "type": "number",
+                      "description": "Number of bathrooms",
+                      "example": 2,
+                      "minimum": 0,
+                      "maximum": 20
+                    },
+                    "guestToilets": {
+                      "type": "number",
+                      "description": "Number of guest of toilets",
+                      "example": 1,
+                      "minimum": 0,
+                      "maximum": 20
+                    },
+                    "securityDoor": {
+                      "type": "boolean",
+                      "description": "Is there a security door in the house",
+                      "example": "true"
+                    },
+                    "alarmConnected": {
+                      "type": "boolean",
+                      "description": "Is there a breaking alarm connected to an alarmcenter",
+                      "example": "true"
+                    },
+                    "basement": {
+                      "type": "boolean",
+                      "description": "Is there a basement in the house",
+                      "example": "true"
+                    },
+                    "subleased": {
+                      "type": "boolean",
+                      "description": "Is the house sublease to another person",
+                      "example": "true"
+                    },
+                    "keyCoveredRisks": {
+                      "type": "array[string]",
+                      "description": "Key covered risks",
+                      "example": "true"
+                    },
+                    "otherBuildings": {
+                      "type": "array[object]",
+                      "description": "Other buildings",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Name of building",
+                          "example": "Garage"
+                        },
+                        "area": {
+                          "type": "number",
+                          "description": "Area",
+                          "example": 50,
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      }
+                    }
+                  }
+                },
+                "vehicle": {
+                  "type": "object",
+                  "description": "Vehicle contract details",
+                  "properties": {
+                    "regNr": {
+                      "type": "string",
+                      "description": "Vehicle registration number",
+                      "example": "FFF123"
+                    },
+                    "vehicleType": {
+                      "type": "string",
+                      "example": "CAR",
+                      "enum": [
+                        "CAR",
+                        "OTHER"
+                      ],
+                      "description": "Vehicle Type"
+                    },
+                    "coverLevel": {
+                      "type": "string",
+                      "example": "GARAGE",
+                      "enum": [
+                        "GARAGE",
+                        "FULL",
+                        "HALV",
+                        "TRAFFIC"
+                      ],
+                      "description": "Cover level"
+                    },
+                    "carBonus": {
+                      "type": "string",
+                      "description": "Determins whether driver had accidents before, gives a hint about the accident-free driving",
+                      "example": "3 av 3"
+                    },
+                    "driverBelow25": {
+                      "type": "boolean",
+                      "description": "",
+                      "example": "true"
+                    },
+                    "driverBelow24": {
+                      "type": "boolean",
+                      "description": "",
+                      "example": "true"
+                    },
+                    "annualMileage": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "",
+                      "example": 10000,
+                      "minimum": 0,
+                      "maximum": 1000000
+                    },
+                    "model": {
+                      "type": "string",
+                      "description": "Vehicle brand & model",
+                      "example": "Ford Mustang"
+                    },
+                    "year": {
+                      "type": "number",
+                      "description": "Vehicle make year",
+                      "example": 2010,
+                      "minimum": 1800,
+                      "maximum": 2100
+                    }
+                  }
+                },
+                "boat": {
+                  "type": "object",
+                  "description": "Boat contract details",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Boat name",
+                      "example": "Vasa"
+                    },
+                    "model": {
+                      "type": "string",
+                      "description": "",
+                      "example": ""
+                    },
+                    "year": {
+                      "type": "number",
+                      "description": "",
+                      "example": ""
+                    }
+                  }
+                },
+                "personal": {
+                  "type": "object",
+                  "description": "Personal contract details",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Person name",
+                      "example": "John Doe"
+                    }
+                  }
+                },
+                "animal": {
+                  "type": "object",
+                  "description": "Animal contract details",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Animal name",
+                      "example": "Kitty"
+                    }
+                  }
+                },
+                "business": {
+                  "type": "object",
+                  "description": "Business contract details",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Company name",
+                      "example": "Microsoft"
+                    },
+                    "regNr": {
+                      "type": "string",
+                      "description": "",
+                      "example": ""
+                    }
+                  }
+                },
+                "policyDetails": {
+                  "type": "object",
+                  "description": "Other policy details",
+                  "properties": {
+                    "startDate": {
+                      "type": "string",
+                      "format": "date",,
+                      "description": "",
+                      "example": ""
+                    },
+                    "policyHolder": {
+                      "type": "string",
+                      "description": "",
+                      "example": ""
+                    },
+                    "coverLimit": {
+                      "type": "number",
+                      "description": "",
+                      "example": ""
+                    },
+                    "paymentFrequency": {
+                      "type": "string",
+                      "description": "",
+                      "example": ""
+                    },
+                    "coverAreas": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "areaClass": {
+                            "type": "string"
+                          },
+                          "condition": {
+                            "type": "string"
+                          },
+                          "deductible": {
+                            "type": "number"
+                          },
+                          "yearlyPrice": {
+                            "type": "number"
+                          },
+                          "included": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "uuid",
+                "insurer",
+                "contractType"
+              ]
+            }
+          }
+        },
+        "required": [
+          "uuid",
+          "status"
+        ]
+      }
+    }
+  }
+}
