@@ -11,14 +11,25 @@ $(function() {
   // modal
   var $open = $('[data-open]');
   var $close = $('[data-close]');
-  var $modal = $('[data-modal]');
 
   $open.on('click', function() {
-    $modal.addClass('is_open');
+    $('body').addClass('is-open-contact');
   });
 
   $close.on('click', function() {
-    $modal.removeClass('is_open');
+    $('body').removeClass('is-open-contact');
+  });
+
+  //modal demo
+  var $demoOpen = $('[data-demo-open]');
+  var $demoClose = $('[data-demo-close]');
+
+  $demoOpen.on('click', function() {
+    $('body').addClass('is-open-demo');
+  });
+
+  $demoClose.on('click', function() {
+    $('body').removeClass('is-open-demo');
   });
 
   //menu
@@ -32,6 +43,12 @@ $(function() {
 
   $menuClose.on('click', function() {
     $menu.removeClass('is-mobile-open');
+  });
+
+  //menu
+  $(document).scroll(function () {
+    var $nav = $("[data-menu-root]");
+    $nav.toggleClass('type-active', $(this).scrollTop() > $nav.height());
   });
 })
 
